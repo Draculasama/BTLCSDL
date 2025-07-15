@@ -8,7 +8,6 @@ import {
   IsString,
   Max,
   Min,
-  MinLength,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -31,7 +30,6 @@ export class CreateKhuyenMaiDto {
   })
   @IsOptional()
   @IsString()
-  @MinLength(10, { message: 'Mô tả phải có ít nhất 10 ký tự' })
   moTa?: string;
 
   @ApiProperty({

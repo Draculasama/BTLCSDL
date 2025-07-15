@@ -6,6 +6,7 @@ import { KhachHang } from './entities/khach-hang.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TaiKhoan } from '../tai-khoan/entities/tai-khoan.entity';
 import { UserRole } from 'src/common/constants/constants';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class KhachHangService {
@@ -17,7 +18,8 @@ export class KhachHangService {
   async create(createKhachHangDto: CreateKhachHangDto): Promise<unknown> {
     const taikhoan = new TaiKhoan();
     taikhoan.tenDangNhap = createKhachHangDto.tenDangNhap;
-    taikhoan.matKhau = createKhachHangDto.matKhau;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    taikhoan.matKhau = await bcrypt.hash(createKhachHangDto.matKhau, 10);
     taikhoan.loai = UserRole.KHACHHANG;
     const khachHang = this.khachHangRepository.create({
       ...createKhachHangDto,

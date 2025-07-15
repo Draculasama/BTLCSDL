@@ -1,4 +1,4 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateDonHangDto } from './create-don-hang.dto';
+import { PickType } from '@nestjs/swagger';
+import { DonHang } from '../entities/don-hang.entity';
 
-export class UpdateDonHangDto extends PartialType(CreateDonHangDto) {}
+export class UpdateDonHangDto extends PickType(DonHang, ['trangThaiDonHang']) {}

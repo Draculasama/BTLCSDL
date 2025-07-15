@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { NhanVienService } from './nhan-vien.service';
 import { CreateNhanVienDto } from './dto/create-nhanvien.dto';
 import { ApiBearerAuth } from '@nestjs/swagger';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @ApiBearerAuth()
 @Controller('nhan-vien')

@@ -16,7 +16,6 @@ import { Public } from 'src/common/decorators/public.decorator';
 @Controller('khuyen-mai')
 export class KhuyenMaiController {
   constructor(private readonly khuyenMaiService: KhuyenMaiService) {}
-
   @Post()
   create(@Body() createKhuyenMaiDto: CreateKhuyenMaiDto) {
     return this.khuyenMaiService.create(createKhuyenMaiDto);

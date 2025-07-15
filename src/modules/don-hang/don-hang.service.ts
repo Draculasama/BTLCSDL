@@ -243,7 +243,9 @@ export class DonHangService {
       relations: {
         khachHang: true,
         chiTietDonHangs: {
-          sanPham: true,
+          sanPham: {
+            hinhAnhs: true,
+          },
         },
       },
     });
@@ -346,16 +348,6 @@ export class DonHangService {
     donHangGioHang.thongTinLienHe = thongTinLienHe;
     donHangGioHang.trangThaiDonHang = TrangThaiDonHang.DA_XAC_NHAN;
     const donHangDaXacNhan = await this.donHangRepository.save(donHangGioHang);
-
-    for (const chiTiet of donHangGioHang.chiTietDonHangs) {
-      await this.sanPhamRepository.update(
-        { id: chiTiet.maSanPham },
-        {
-          soLuongHienCon: () => `soLuongHienCon - ${chiTiet.soLuong}`,
-          soLuongDaBan: () => `soLuongDaBan + ${chiTiet.soLuong}`,
-        },
-      );
-    }
 
     return this.findOne(donHangDaXacNhan.id);
   }
@@ -465,11 +457,16 @@ export class DonHangService {
 
   findAll() {
     return this.donHangRepository.find({
-      relations: ['khachHang', 'chiTietDonHangs', 'thongTinLienHe'],
+      relations: [
+        'khachHang',
+        'chiTietDonHangs.sanPham.hinhAnhs',
+        'thongTinLienHe',
+      ],
     });
   }
   async findByKhachHang(account: any) {
     const khachHang = await this.khachHangRepository.findOne({
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
       where: { taiKhoan: { id: account.id } },
     });
 
@@ -478,8 +475,10 @@ export class DonHangService {
       relations: [
         'khachHang',
         'chiTietDonHangs',
-        'thongTinLienHe',
         'chiTietDonHangs.sanPham',
+        'chiTietDonHangs.sanPham.hinhAnhs',
+
+        'thongTinLienHe',
       ],
     });
   }
@@ -490,9 +489,18 @@ export class DonHangService {
       relations: ['khachHang', 'chiTietDonHangs', 'thongTinLienHe'],
     });
   }
+  getCartCount(accountId: number): Promise<number> {
+    return this.donHangRepository.count({
+      where: {
+        khachHang: { taiKhoan: { id: accountId } },
+      },
+    });
+  }
 
   update(id: number, updateDonHangDto: UpdateDonHangDto) {
-    return `This action updates a #${id} donHang`;
+    return this.donHangRepository.update(id, updateDonHangDto).then(() => {
+      return this.findOne(id);
+    });
   }
 
   remove(id: number) {

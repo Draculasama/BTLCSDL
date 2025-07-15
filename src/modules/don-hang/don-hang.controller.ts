@@ -23,6 +23,7 @@ import { AddToCartDto } from './dto/addtocard.dto';
 import { CheckoutCartDto } from './dto/checkoutcard.dto';
 import { CreateDonHangDto } from './dto/create-don-hang.dto';
 import { DonHang } from './entities/don-hang.entity';
+import { UpdateDonHangDto } from './dto/update-don-hang.dto';
 @ApiBearerAuth()
 @Controller('don-hang')
 export class DonHangController {
@@ -59,6 +60,25 @@ export class DonHangController {
   })
   getCart(@CurrentAccount() account: any) {
     return this.donHangService.getCart(account.id);
+  }
+
+  @Get('cart/count')
+  @UseGuards(RolesGuard)
+  @Roles(UserRole.KHACHHANG)
+  @ApiOperation({
+    summary: 'Đếm số lượng sản phẩm trong giỏ hàng (Khách hàng)',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Lấy số lượng sản phẩm trong giỏ hàng thành công',
+  })
+  @ApiResponse({
+    status: 403,
+    description:
+      'Chỉ khách hàng mới có quyền xem số lượng sản phẩm trong giỏ hàng',
+  })
+  getCartCount(@CurrentAccount() account: any) {
+    return this.donHangService.getCartCount(account.id);
   }
 
   @Patch('cart/update/:maSanPham/:soLuong')
@@ -157,5 +177,11 @@ export class DonHangController {
   @Get('khach-hang')
   findByKhachHangId(@CurrentAccount() account: any) {
     return this.donHangService.findByKhachHang(account);
+  }
+  @Patch(':id')
+  @UseGuards(RolesGuard)
+  @Roles(UserRole.ADMIN, UserRole.NHANVIEN)
+  update(@Param('id') id: number, @Body() updateDonHangDto: UpdateDonHangDto) {
+    return this.donHangService.update(id, updateDonHangDto);
   }
 }

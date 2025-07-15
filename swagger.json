@@ -1080,6 +1080,29 @@
         ]
       }
     },
+    "/don-hang/cart/count": {
+      "get": {
+        "operationId": "DonHangController_getCartCount",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Lấy số lượng sản phẩm trong giỏ hàng thành công"
+          },
+          "403": {
+            "description": "Chỉ khách hàng mới có quyền xem số lượng sản phẩm trong giỏ hàng"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Đếm số lượng sản phẩm trong giỏ hàng (Khách hàng)",
+        "tags": [
+          "DonHang"
+        ]
+      }
+    },
     "/don-hang/cart/update/{maSanPham}/{soLuong}": {
       "patch": {
         "operationId": "DonHangController_updateCartItem",
@@ -1279,6 +1302,44 @@
       "get": {
         "operationId": "DonHangController_findByKhachHangId",
         "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "DonHang"
+        ]
+      }
+    },
+    "/don-hang/{id}": {
+      "patch": {
+        "operationId": "DonHangController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDonHangDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": ""
@@ -2089,6 +2150,17 @@
           "phuongThucThanhToan",
           "trangThaiDonHang",
           "tongTien"
+        ]
+      },
+      "UpdateDonHangDto": {
+        "type": "object",
+        "properties": {
+          "trangThaiDonHang": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "trangThaiDonHang"
         ]
       },
       "CreateKhuyenMaiDto": {

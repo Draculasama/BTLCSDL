@@ -5,7 +5,7 @@ import { CreateNhanVienDto } from './dto/create-nhanvien.dto';
 import { NhanVien } from './entities/nhan-vien.entity';
 import { TaiKhoan } from '../tai-khoan/entities/tai-khoan.entity';
 import { UserRole } from 'src/common/constants/constants';
-
+import * as bcrypt from 'bcrypt';
 @Injectable()
 export class NhanVienService {
   constructor(
@@ -16,7 +16,9 @@ export class NhanVienService {
   async create(createNhanVienDto: CreateNhanVienDto): Promise<NhanVien> {
     const taikhoan = new TaiKhoan();
     taikhoan.tenDangNhap = createNhanVienDto.tenDangNhap;
-    taikhoan.matKhau = createNhanVienDto.matKhau;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    taikhoan.matKhau = await bcrypt.hash(createNhanVienDto.matKhau, 10);
+
     taikhoan.loai = UserRole.NHANVIEN;
     const nhanVien = this.nhanVienRepository.create({
       ...createNhanVienDto,

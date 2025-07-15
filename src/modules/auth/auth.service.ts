@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserRole } from 'src/common/constants/constants';
 import { TaiKhoanService } from '../tai-khoan/tai-khoan.service';
+import * as bcrypt from 'bcrypt';
 @Injectable()
 export class AuthService {
   constructor(
@@ -14,7 +15,9 @@ export class AuthService {
     if (!taikhoan) {
       return 'Tài khoản không tồn tại';
     }
-    if (taikhoan.matKhau != matKhau) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    const isMatch = await bcrypt.compare(matKhau, taikhoan.matKhau);
+    if (!isMatch) {
       return 'Mật khẩu không đúng';
     }
 
