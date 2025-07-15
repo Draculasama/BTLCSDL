@@ -38,6 +38,7 @@ export class NhanVien {
   vaiTro: string;
   @OneToOne(() => TaiKhoan, (taiKhoan) => taiKhoan.nhanVien, {
     cascade: true,
+    onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'taiKhoanId' })
   taiKhoan: TaiKhoan;

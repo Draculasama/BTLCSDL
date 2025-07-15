@@ -16,6 +16,26 @@ body {
     margin: 0 auto;
     padding: 0 20px;
 }
+.search-bar {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
 
 /* Header */
 .header {
@@ -109,7 +129,7 @@ body {
     position: absolute;
     top: -8px;
     right: -8px;
-    background: #7cb342;
+     background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
     color: white;
     font-size: 12px;
     padding: 2px 6px;
@@ -274,7 +294,7 @@ body {
 .size-btn.active,
 .size-btn:hover {
     border-color: #7cb342;
-    background: #7cb342;
+     background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
     color: white;
 }
 
@@ -298,7 +318,7 @@ body {
 }
 
 .qty-btn:hover {
-    background: #7cb342;
+     background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
     color: white;
     border-color: #7cb342;
 }
@@ -330,7 +350,7 @@ body {
 }
 
 .add-to-cart-btn {
-    background: #7cb342;
+     background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
     color: white;
 }
 
@@ -531,7 +551,7 @@ body {
 }
 
 .write-review-btn {
-    background: #7cb342;
+     background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
     color: white;
     border: none;
     padding: 12px 24px;
@@ -573,7 +593,7 @@ body {
 .reviewer-avatar {
     width: 40px;
     height: 40px;
-    background: #7cb342;
+     background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
     color: white;
     border-radius: 50%;
     display: flex;

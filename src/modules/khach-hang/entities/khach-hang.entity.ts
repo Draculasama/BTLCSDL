@@ -29,7 +29,7 @@ export class KhachHang {
   sdt: string;
   @OneToOne(() => TaiKhoan, (taiKhoan) => taiKhoan.khachHang, {
     cascade: true,
-    onDelete: 'SET NULL',
+    onDelete: 'CASCADE',
   })
   @JoinColumn()
   taiKhoan: TaiKhoan;

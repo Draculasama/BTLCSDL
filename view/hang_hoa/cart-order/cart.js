@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const API_BASE_URL = ""
+  const API_BASE_URL = "https://btlcsdl.onrender.com"
   let cartData = null
   let isLoggedIn = false
   let authToken = null
@@ -202,6 +202,9 @@ document.addEventListener("DOMContentLoaded", () => {
         : "/placeholder.svg?height=80&width=80"
 
     div.innerHTML = `
+            <div class="item-image">
+                <img src="${imageUrl}" alt="${item.sanPham}" >
+            </div>
             <div class="item-info">
                 <div class="item-details">
                     <h4>${item.sanPham.ten}</h4>
