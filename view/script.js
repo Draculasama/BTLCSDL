@@ -165,10 +165,11 @@ function showLoginRequired() {
     document.getElementById('mainContent').style.display = 'none';
     document.getElementById('loginRequiredMessage').style.display = 'block';
     document.getElementById('customerLoginBtn').style.display = 'inline-block';
+    document.getElementById('showLoginBtn').style.display = 'inline-block';
     document.getElementById('customerInfo').style.display = 'none';
     
     // Ensure the login button is visible and styled
-    const loginBtn = document.getElementById('customerLoginBtn');
+    const loginBtn = document.getElementById('customerLoginBtn') || document.getElementById('showLoginBtn');
     if (loginBtn) {
         loginBtn.style.display = 'inline-block';
         loginBtn.style.visibility = 'visible';
@@ -180,6 +181,7 @@ function showMainContent() {
     document.getElementById('mainContent').style.display = 'flex';
     document.getElementById('loginRequiredMessage').style.display = 'none';
     document.getElementById('customerLoginBtn').style.display = 'none';
+    document.getElementById('showLoginBtn').style.display = 'none';
     document.getElementById('customerInfo').style.display = 'block';
 }
 

@@ -492,3 +492,29 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#customerAuthSection {
+    display: flex;
+    align-items: center;
+}
+
+#customerLoginBtn {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.auth-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+#showLoginBtn:hover {
+    background-color: #218838 !important;
+}

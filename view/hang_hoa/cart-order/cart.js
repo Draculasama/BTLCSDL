@@ -203,7 +203,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     div.innerHTML = `
             <div class="item-info">
-                <img src="${imageUrl}" alt="${item.sanPham.ten}" class="item-image">
                 <div class="item-details">
                     <h4>${item.sanPham.ten}</h4>
                     <p>Mã SP: ${item.sanPham.id}</p>
