@@ -22,8 +22,12 @@ export class TaiKhoan {
   @ApiProperty()
   @IsEnum(UserRole)
   loai: UserRole;
-  @OneToOne(() => KhachHang, (khachHang) => khachHang.taiKhoan)
+  @OneToOne(() => KhachHang, (khachHang) => khachHang.taiKhoan, {
+    onDelete: 'CASCADE',
+  })
   khachHang: KhachHang;
-  @OneToOne(() => NhanVien, (nhanVien) => nhanVien.taiKhoan)
+  @OneToOne(() => NhanVien, (nhanVien) => nhanVien.taiKhoan, {
+    onDelete: 'CASCADE',
+  })
   nhanVien: NhanVien;
 }

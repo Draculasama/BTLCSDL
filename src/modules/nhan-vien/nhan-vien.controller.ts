@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { NhanVienService } from './nhan-vien.service';
 import { CreateNhanVienDto } from './dto/create-nhanvien.dto';
 import { ApiBearerAuth } from '@nestjs/swagger';
@@ -18,7 +18,10 @@ export class NhanVienController {
   findAll() {
     return this.nhanVienService.findAll();
   }
-
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.nhanVienService.remove(+id);
+  }
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.nhanVienService.findOne(+id);

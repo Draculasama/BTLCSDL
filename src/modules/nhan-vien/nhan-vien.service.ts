@@ -39,4 +39,7 @@ export class NhanVienService {
       where: { id },
     });
   }
+  async remove(id: number): Promise<void> {
+    await this.nhanVienRepository.delete(id);
+  }
 }
